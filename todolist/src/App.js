@@ -1,130 +1,104 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import './App.css';
-const Todo = ({ todo, index, completeTodo, removeTodo, updateTodo }) => {
-  return (
-    <div
-      style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }}
-      className="todo"
-    >
-      {todo.text}
-      <div>
-        <button onClick={() => completeTodo(index)}>Complete</button>
-        <button onClick={() => removeTodo(index)}>x</button>
-        <button onClick={() => updateTodo(index)}>Update</button>
-      </div>
-      <div>
-        <p>Priority: {todo.priority}</p>
-        <p>Category: {todo.category}</p>
-        <p>Deadline: {todo.deadline}</p>
-        <p>Reminder: {todo.reminder}</p>
-        <p>Delegated to: {todo.delegatedTo}</p>
-        <p>Status: {todo.status}</p>
-        <p>Dependencies: {todo.dependencies}</p>
-        <p>Collaborators: {todo.collaborators}</p>
-      </div>
-    </div>
-  );
-};
+const App = () => (
+  <div className="app">
+    <Header />
+    <TodoList />
+    <Footer />
+  </div>
+);
 
-const TodoForm = ({ addTodo }) => {
-  const [value, setValue] = useState('');
+const Header = () => (
+  <header className="header">
+    <h1>My React Application for ToDo List</h1>
+  </header>
+);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (!value) return;
-    addTodo(value);
-    setValue('');
+const Footer = () => (
+  <footer className="footer">
+    <p>By Aqib Tareen</p>
+  </footer>
+);
+
+const TodoList = () => {
+  const [tasks, setTasks] = useState([]);
+  const [taskInput, setTaskInput] = useState("");
+  const [category, setCategory] = useState("");
+  const [priority, setPriority] = useState("");
+  const [dueDate, setDueDate] = useState("");
+
+
+
+
+  const handleTaskInput = (event) => {
+    setTaskInput(event.target.value);
+  };
+
+  const handleCategory = (event) => {
+    setCategory(event.target.value);
+  };
+
+  const handlePriority = (event) => {
+    setPriority(event.target.value);
+  };
+
+  const handleDueDate = (event) => {
+    setDueDate(event.target.value);
+  };
+
+  const handleAddTask = (event) => {
+    event.preventDefault();
+    setTasks([...tasks, {
+      task: taskInput,
+      category: category,
+      priority: priority,
+      dueDate: dueDate
+    }]);
+    setTaskInput("");
+    setCategory("");
+    setPriority("");
+    setDueDate("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        className="input"
-        value={value}
-        onChange={e => setValue(e.target.value)}
-        placeholder="Add a new task..."
-      />
-    </form>
-  );
-};
-
-const App = () => {
-  const [todos, setTodos] = useState([
-    {
-      text: 'Learn React',
-      isCompleted: false,
-      priority: 'High',
-      category: 'Work',
-      deadline: '2023-03-01',
-      reminder: '2022-02-28',
-      delegatedTo: 'John Doe',
-      status: 'Not started',
-      dependencies: 'None',
-      collaborators: 'Jane Doe'
-    },
-    {
-      text: 'Buy groceries',
-      isCompleted: false,
-      priority: 'Low',
-      category: 'Personal',
-      deadline: '2023-02-15',
-      reminder: '2022-02-14',
-      delegatedTo: '',
-      status: 'Not started',
-      dependencies: 'None',
-      collaborators: ''
-    },
-    {
-      text: 'Pay bills',
-      isCompleted: false,
-      priority: 'High',
-      category: 'Personal',
-      deadline: '2023-02-28',
-      reminder: '2022-02-27',
-      delegatedTo: '',
-      status: 'Not started',
-      dependencies: 'None',
-      collaborators: ''
-    }
-  ]);
-
-  const addTodo = text => {
-    const newTodos = [...todos, { text }];
-    setTodos(newTodos);
-  };
-
-  const completeTodo = index => {
-    const newTodos = [...todos];
-    newTodos[index].isCompleted = true;
-    setTodos(newTodos);
-  };
-
-  const removeTodo = index => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
-  };
-
-  const updateTodo = index => {
-    // add code to update a todo here
-  };
-
-  return (
-    <div className="app">
-      <div className="todo-list">
-        {todos.map((todo, index) => (
-          <Todo
-            key={index}
-            index={index}
-            todo={todo}
-            completeTodo={completeTodo}
-            removeTodo={removeTodo}
-            updateTodo={updateTodo}
-          />
-        ))}
-        <TodoForm addTodo={addTodo} />
-      </div>
+    <div className="todo-list">
+      <form onSubmit={handleAddTask}>
+        <input type="text" value={taskInput} onChange={handleTaskInput} placeholder="Task" />
+        <select value={category} onChange={handleCategory}>
+          <option value="">Select Category</option>
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+          <option value="shopping">Shopping</option>
+        </select>
+        <select value={priority} onChange={handlePriority}>
+          <option value="">Select Priority</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+        <input type="date" value={dueDate} onChange={handleDueDate} />
+        <button type="submit">Add Task</button>
+      </form>
+      <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Category</th>
+            <th>Priority</th>
+            <th>Due Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map((task, index) => (
+            <tr key={index}>
+              <td>{task.task}</td>
+              <td>{task.category}</td>
+              <td>{task.priority}</td>
+              <td>{task.dueDate}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

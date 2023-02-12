@@ -1,160 +1,93 @@
-.app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  background-color: #F0F0F0;
+.todo-list {
+  width: 80%;
+  margin: 50px auto;
+  text-align: center;
 }
 
-todo-list {
-  width: 500px;
-  background-color: white;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  margin-top: 50px;
-}
-
-todo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #E0E0E0;
-}
-
-
-
-complete-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: #707070;
-}
-
-remove-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: #707070;
-  margin-left: 10px;
-}
-
-todo-form {
+form {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
-todo-input {
-  width: 100%;
+.footer {
+  background-color: #333;
+  color: white;
   padding: 10px;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-  margin-right: 10px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
-
-add-button {
-  background-color: #707070;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 500;
+input[type="text"],
+select,
+input[type="date"] {
   padding: 10px 20px;
-}
-
-add-button:hover {
-  background-color: #606060;
-}
-
-priority {
-  background-color: #FFC107;
+  margin: 10px;
+  width: 30%;
+  font-size: 1.2em;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 5px 10px;
-  margin-right: 10px;
-  text-transform: uppercase;
+  outline: none;
+  box-shadow: 0 0 10px #ddd;
+  transition: all 0.3s ease-in-out;
 }
 
-category {
-  background-color: #03A9F4;
-  border-radius: 5px;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 5px 10px;
-  margin-right: 10px;
-  text-transform: uppercase;
+input[type="text"]:focus,
+select:focus,
+input[type="date"]:focus {
+  border: 1px solid #4CAF50;
+  box-shadow: 0 0 10px #4CAF50;
 }
 
-deadline {
-  background-color: #F44336;
-  border-radius: 5px;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 5px 10px;
-  margin-right: 10px;
-  text-transform: uppercase;
-}
-
-reminder {
+button[type="submit"] {
+  padding: 10px 20px;
   background-color: #4CAF50;
-  border-radius: 5px;
   color: white;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 5px 10px;
-  margin-right: 10px;
-  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
-delegated {
-  background-color: #9C27B0;
-  border-radius: 5px;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 5px 10px;
-  margin-right: 10px;
-  text-transform: uppercase;
+button[type="submit"]:hover {
+  background-color: white;
+  color: #4CAF50;
 }
 
-dependency {
-  background-color: #3F51B5;
-  border-radius: 5px;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 5px 10px;
-  margin-right: 10px;
-  text-transform: uppercase;
+table {
+  width: 100%;
+  text-align: left;
+  margin-top: 50px;
+  border-collapse: collapse;
 }
 
-collaboration {
-  background-color: #2196F3;
-  border-radius: 5px;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 5px 10px;
-  text-transform: uppercase;
+thead {
+  background-color: #ddd;
 }
-status-tracking {
-  background-color: #9E9E9E;
-  border-radius: 5px;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 5px 10px;
-  text-transform: uppercase;
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+th {
+  font-weight: bold;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #ddd;
 }
